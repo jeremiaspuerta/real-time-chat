@@ -1,7 +1,7 @@
 import { ScrollShadow } from "@nextui-org/react";
-import { BubbleMessage } from "./bubbleMessage";
+import { BubbleMessage } from "./BubbleMessage";
 
-export const CurrentChatMessages = () => {
+export const ChatMessagesComponent = () => {
   return (
     <ScrollShadow hideScrollBar>
       <BubbleMessage align="end" />

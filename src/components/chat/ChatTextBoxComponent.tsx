@@ -1,9 +1,8 @@
 import { Textarea } from "@nextui-org/react";
-import { PLACEHOLDERS } from "../constants/placeholders";
+import { PLACEHOLDERS } from "@/constants/Placeholders";
 
-export const MessageInput = () => {
+export const ChatTextBoxComponent = () => {
   return (
-    <>
       <Textarea
         classNames={{
           base: "max-w-screen max-h-24",
@@ -13,6 +12,5 @@ export const MessageInput = () => {
         placeholder={PLACEHOLDERS.CHAT_MESSAGE}
         disableAutosize
       />
-    </>
   );
 };

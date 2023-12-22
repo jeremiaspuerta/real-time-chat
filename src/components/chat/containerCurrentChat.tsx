@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { MessageInput } from "./messageInput";
-import { CurrentChatMessages } from "./currentChatMessages";
-import { BubbleUser } from "./bubbleUser";
+import { ChatTextBoxComponent } from "./ChatTextBoxComponent";
+import { ChatMessagesComponent } from "./ChatMessagesComponent";
+import { BubbleUser } from "../shared/BubbleUser";
 
 interface PropsInterface {
   inputMessage?: Component;
@@ -15,8 +15,8 @@ export const ContainerCurrentChat = ({
   return (
     <div className="flex flex-col h-screen w-screen p-5 gap-5 bg-white shadow-lg">
       <BubbleUser user_id={1} username="Carlos Perez" is_online={true} />
-      <CurrentChatMessages />
-      <MessageInput />
+      <ChatMessagesComponent />
+      <ChatTextBoxComponent />
     </div>
   );
 };

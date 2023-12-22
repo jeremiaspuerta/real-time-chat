@@ -1,11 +1,5 @@
-import { ContainerCurrentChat } from "@/components/chat/containerCurrentChat";
-import { HistoryMessages } from "@/components/chat/historyMessages";
-
-export default function Home() {
+export default function Page() {
   return (
-    <div className="w-full h-screen flex flex-row gap-4 bg-white">
-      <HistoryMessages />
-      <ContainerCurrentChat />
-    </div>
+      <p className="text-black">Homepage</p>
   );
 }
