@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  mongo1:
+    container_name: mongo1
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    networks:
+      - mongoCluster
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "myReplicaSetName","--bind_ip","localhost,mongo1" ]
+    healthcheck:
+      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'myReplicaSetName',members:[{_id:0,host:'mongo1'},{_id:1,host:'mongo2'},{_id:2,host:'mongo3'}]}) }; var db = db.getSiblingDB('chat'); db.createCollection('User'); db.createCollection('Chat'); db.createCollection('Message'); db.createCollection('ChatUser');" | mongosh --port 27017 --quiet
+      interval: 5s
+      timeout: 30s
+      start_period: 0s
+      start_interval: 1s
+      retries: 30
+  mongo2:
+    container_name: mongo2
+    image: mongo:latest
+    ports:
+      - 27018:27017
+    networks:
+      - mongoCluster
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "myReplicaSetName","--bind_ip","localhost,mongo2" ]
+  mongo3:
+    container_name: mongo3
+    image: mongo:latest
+    ports:
+      - 27019:27017
+    networks:
+      - mongoCluster
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "myReplicaSetName","--bind_ip","localhost,mongo3" ]
+  mongosetup:
+    image: mongo:latest
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    volumes:
+      - ./data:/data/db
+      # - ./mongo_setup.sh:/docker-entrypoint-initdb.d/mongo_setup.sh
+    restart: "no"
+    # entrypoint: [ "bash", "mongo_setup.sh"]
+networks:
+  mongoCluster:
+    driver: bridge
