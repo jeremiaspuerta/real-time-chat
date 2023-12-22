@@ -3,18 +3,13 @@
 import { Avatar, Chip } from "@nextui-org/react";
 
 type Props = {
-  user_id: string;
   name: string;
   isOnline: boolean;
-  handleClick?: () => void;
-}
+  // eslint-disable-next-line no-unused-vars
+  handleClick?: () => Promise<void>;
+};
 
-export const BubbleUser = ({
-  user_id,
-  name,
-  isOnline,
-  handleClick
-}: Props) => {
+export const BubbleUser = ({ name, isOnline, handleClick }: Props) => {
   const bgHoverStyle = handleClick ? "hover:bg-slate-200" : "";
 
   return (
@@ -23,7 +18,7 @@ export const BubbleUser = ({
         "w-full flex flex-row gap-5 items-center p-4 bg-slate-100 rounded-2xl " +
         bgHoverStyle
       }
-      onClick={handleClick}
+      onClick={() => handleClick}
     >
       <Avatar
         src="https://i.pravatar.cc/150?u=a042581f4e29026024d"

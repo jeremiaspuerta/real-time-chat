@@ -1,11 +1,8 @@
-import { UserRepository } from '@/Infrastructure/UserRepository';
-import type { NextApiRequest } from 'next'
 import { NextResponse } from "next/server";
+import { UserRepository } from "../../../../Infrastructure/UserRepository";
 
-export async function GET(
-  req: NextApiRequest
-){
-  const users = await (new UserRepository()).getUsers()
+export async function GET() {
+  const users = await new UserRepository().getUsers();
 
   return NextResponse.json(users, { status: 200 });
 }

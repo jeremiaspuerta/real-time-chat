@@ -1,3 +1,1 @@
-export const PLACEHOLDERS = {
-  CHAT_MESSAGE: "Type something...",
-};
+export const PLACEHOLDER_CHAT_MESSAGE = "Type something...";
