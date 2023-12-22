@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx prettier . --write && npx eslint .
+npx prettier src --write && npx eslint src
