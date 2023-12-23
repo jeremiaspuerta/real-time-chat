@@ -34,7 +34,8 @@ export const SignUpForm = ({ handleSignUp }: Props) => {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form
       style={{ display: "flex", flexDirection: "column", gap: "2vh" }}
-      onSubmit={() => handleSubmit(onSubmit)}
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      onSubmit={handleSubmit(onSubmit)}
     >
       <FormFields register={register} errors={errors} />
 
