@@ -10,23 +10,23 @@ import {
   UseFormRegister,
   FieldErrors,
 } from "react-hook-form";
-import { UserCreation } from "../Domain/RepositoryInterface/UserRepositoryInterface";
+import { UserLogIn } from "../Domain/RepositoryInterface/UserRepositoryInterface";
 
 type Props = {
   // eslint-disable-next-line no-unused-vars
-  handleSignUp(userCreation: UserCreation): Promise<void>;
+  handleLogIn(user: UserLogIn): Promise<void>;
 };
 
-export const SignUpForm = ({ handleSignUp }: Props) => {
+export const LogInForm = ({ handleLogIn }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserCreation>();
-  const onSubmit: SubmitHandler<UserCreation> = (data) => {
+  } = useForm<UserLogIn>();
+  const onSubmit: SubmitHandler<UserLogIn> = (data) => {
     setIsLoading(true);
-    void handleSignUp(data);
+    void handleLogIn(data);
     setIsLoading(false);
   };
 
@@ -40,44 +40,32 @@ export const SignUpForm = ({ handleSignUp }: Props) => {
       <FormFields register={register} errors={errors} />
 
       <Button type="submit" color="primary" isLoading={isLoading}>
-        Sign Up
+        Log in
       </Button>
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-        Already have an account?{" "}
-        <Link
-          href={"/login"}
-          className="font-medium hover:underline dark:text-primary-500"
+          Don’t have an account yet?{" "}
+          <Link
+            href={"/signup"}
+            className="font-medium  hover:underline dark:text-primary-500"
             style={{color: "#338DF3"}}
-        >
-          Login here
-        </Link>
-      </p>
+          >
+            Sign up
+          </Link>
+        </p>
     </form>
   );
 };
 
 type FormFieldsProps = {
-  readonly register: UseFormRegister<UserCreation>;
-  readonly errors: FieldErrors<UserCreation>;
+  readonly register: UseFormRegister<UserLogIn>;
+  readonly errors: FieldErrors<UserLogIn>;
 };
 
 const FormFields = ({ register, errors }: FormFieldsProps) => {
   return (
     <>
       <div>
-        <Input
-            type="text"
-            label="Name"
-            labelPlacement={'outside'}
-            variant="bordered"
-            placeholder="John Doe"
-            isInvalid={Boolean(errors.name)}
-            errorMessage={errors.name ? 'This field is required' : ''}
-            {...register("name", { required: true })}
-          />
-      </div>
-      <div>
-      <Input
+          <Input
             type="email"
             label="Email"
             labelPlacement={'outside'}
@@ -87,6 +75,7 @@ const FormFields = ({ register, errors }: FormFieldsProps) => {
             errorMessage={errors.email ? 'This field is required' : ''}
             {...register("email", { required: true })}
           />
+
       </div>
       <div>
       <Input
@@ -99,6 +88,7 @@ const FormFields = ({ register, errors }: FormFieldsProps) => {
             errorMessage={errors.password ? 'This field is required' : ''}
             {...register("password", { required: true })}
           />
+
       </div>
     </>
   );

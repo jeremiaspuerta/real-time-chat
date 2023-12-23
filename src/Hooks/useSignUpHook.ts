@@ -10,7 +10,7 @@ export function useSignUpHook() {
   const router = useRouter();
 
   async function handleSignUp(user: UserCreation): Promise<void> {
-    const signUpRequest = await post("/api/user/sign-up", user);
+    const signUpRequest = await post("/api/user/signup", user);
 
     if (signUpRequest.httpStatus === HTTP_OK) {
       toast.success(signUpRequest.body.message);

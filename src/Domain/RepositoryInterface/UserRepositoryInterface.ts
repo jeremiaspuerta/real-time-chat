@@ -5,6 +5,11 @@ export type UserCreation = {
   email: string;
   password: string;
 };
+
+export type UserLogIn = {
+  email: string;
+  password: string;
+}
 export interface UserRepositoryInterface {
   getUsers(): Promise<User[]>;
   // eslint-disable-next-line no-unused-vars
