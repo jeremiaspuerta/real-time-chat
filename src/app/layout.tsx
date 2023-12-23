@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
-import { LayoutContainerComponent } from "../components/layout/LayoutContainerComponent";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +16,13 @@ export default function RootLayout({
 }: {
   readonly children: React.ReactNode;
 }) {
+
   return (
     <html lang="en" className="light">
-      <body className={inter.className}>
+      <body className={`${inter.className} h-screen w-full`}>
         <Providers>
-          <LayoutContainerComponent>{children}</LayoutContainerComponent>
+          <Toaster />
+          {children}
         </Providers>
       </body>
     </html>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import * as fetch from "../Helper/HttpHelper";
 import { startChatUseCase } from "../Domain/UseCase/ChatUseCases";
 import { useRouter } from "next/navigation";
-import { getUsersUseCase } from "../Domain/UseCase/UserUseCases";
+import { getUsersUseCase } from "../Domain/UseCase/SignUpUseCase";
 
 export function useLayoutHook() {
   const [users, setUsers] = useState<null | User[]>(null);

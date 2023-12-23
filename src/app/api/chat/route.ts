@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ChatRepository } from "../../../Infrastructure/ChatRepository";
+import { HTTP_CONFLICT, HTTP_OK } from "../../../Constants/HttpStatusCode";
 
 interface CreateChatRequest extends NextRequest {
   json(): Promise<{
@@ -14,14 +15,14 @@ export async function POST(req: CreateChatRequest) {
   const findChat = await chatRepository.findChatByUserIds(userIds);
 
   if (typeof findChat == "object") {
-    return NextResponse.json({ message: "Chat exists!" }, { status: 409 });
+    return NextResponse.json({ message: "Chat exists!" }, { status: HTTP_CONFLICT });
   }
 
   const chat = await chatRepository.createChat(userIds);
 
   if (!chat) {
-    return NextResponse.json({ message: "error" }, { status: 409 });
+    return NextResponse.json({ message: "error" }, { status: HTTP_CONFLICT });
   }
 
-  return NextResponse.json(chat, { status: 200 });
+  return NextResponse.json(chat, { status: HTTP_OK });
 }

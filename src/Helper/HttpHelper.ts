@@ -2,13 +2,24 @@ export type HttpHelperType = {
   // eslint-disable-next-line no-unused-vars
   get(path: string, config?: RequestInit): Promise<unknown>;
   // eslint-disable-next-line no-unused-vars
-  post(path: string, body: T, config?: RequestInit): Promise<unknown>;
+  post(path: string, body: unknown, config?: RequestInit): Promise<SuccessResponse>;
 };
 
-async function http(path: string, config: RequestInit): Promise<unknown> {
+type UnknownBody = {
+  message?: string,
+  [key: string]: unknown
+}
+
+export type SuccessResponse = {
+  body: UnknownBody,
+  httpStatus: number
+}
+
+async function http(path: string, config: RequestInit): Promise<SuccessResponse> {
   const request = new Request(path, config);
   const response = await fetch(request);
 
+  // TODO
   if (!response.ok) {
     // throw new Error({
     //   name: response.status.toString(),
@@ -16,8 +27,12 @@ async function http(path: string, config: RequestInit): Promise<unknown> {
     // });
   }
 
-  // may error if there is no body, return empty array
-  return response.json() as unknown;
+  const responseBody = await response.json() as UnknownBody;
+
+  return {
+    body: responseBody,
+    httpStatus: response.status
+  }
 }
 
 export async function get(
@@ -32,7 +47,7 @@ export async function post<T>(
   path: string,
   body: T,
   config?: RequestInit,
-): Promise<unknown> {
+): Promise<SuccessResponse> {
   const init = { method: "post", body: JSON.stringify(body), ...config };
   return await http(path, init);
 }
