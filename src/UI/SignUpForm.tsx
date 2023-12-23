@@ -47,7 +47,7 @@ export const SignUpForm = ({ handleSignUp }: Props) => {
         <Link
           href={"/login"}
           className="font-medium hover:underline dark:text-primary-500"
-            style={{color: "#338DF3"}}
+          style={{ color: "#338DF3" }}
         >
           Login here
         </Link>
@@ -66,39 +66,39 @@ const FormFields = ({ register, errors }: FormFieldsProps) => {
     <>
       <div>
         <Input
-            type="text"
-            label="Name"
-            labelPlacement={'outside'}
-            variant="bordered"
-            placeholder="John Doe"
-            isInvalid={Boolean(errors.name)}
-            errorMessage={errors.name ? 'This field is required' : ''}
-            {...register("name", { required: true })}
-          />
+          type="text"
+          label="Name"
+          labelPlacement={"outside"}
+          variant="bordered"
+          placeholder="John Doe"
+          isInvalid={Boolean(errors.name)}
+          errorMessage={errors.name ? "This field is required" : ""}
+          {...register("name", { required: true })}
+        />
       </div>
       <div>
-      <Input
-            type="email"
-            label="Email"
-            labelPlacement={'outside'}
-            variant="bordered"
-            placeholder="name@company.com"
-            isInvalid={Boolean(errors.email)}
-            errorMessage={errors.email ? 'This field is required' : ''}
-            {...register("email", { required: true })}
-          />
+        <Input
+          type="email"
+          label="Email"
+          labelPlacement={"outside"}
+          variant="bordered"
+          placeholder="name@company.com"
+          isInvalid={Boolean(errors.email)}
+          errorMessage={errors.email ? "This field is required" : ""}
+          {...register("email", { required: true })}
+        />
       </div>
       <div>
-      <Input
-            type="password"
-            label="Password"
-            labelPlacement={'outside'}
-            variant="bordered"
-            placeholder="••••••••"
-            isInvalid={Boolean(errors.password)}
-            errorMessage={errors.password ? 'This field is required' : ''}
-            {...register("password", { required: true })}
-          />
+        <Input
+          type="password"
+          label="Password"
+          labelPlacement={"outside"}
+          variant="bordered"
+          placeholder="••••••••"
+          isInvalid={Boolean(errors.password)}
+          errorMessage={errors.password ? "This field is required" : ""}
+          {...register("password", { required: true })}
+        />
       </div>
     </>
   );

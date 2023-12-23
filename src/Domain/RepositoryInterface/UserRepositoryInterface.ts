@@ -9,7 +9,7 @@ export type UserCreation = {
 export type UserLogIn = {
   email: string;
   password: string;
-}
+};
 export interface UserRepositoryInterface {
   getUsers(): Promise<User[]>;
   // eslint-disable-next-line no-unused-vars
