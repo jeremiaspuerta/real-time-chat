@@ -6,7 +6,6 @@ export default function RootLayout({
 }: {
   readonly children: React.ReactNode;
 }) {
-
   return (
     <>
       <Toaster />

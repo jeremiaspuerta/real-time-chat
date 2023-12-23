@@ -2,20 +2,30 @@ export type HttpHelperType = {
   // eslint-disable-next-line no-unused-vars
   get(path: string, config?: RequestInit): Promise<unknown>;
   // eslint-disable-next-line no-unused-vars
-  post(path: string, body: unknown, config?: RequestInit): Promise<SuccessResponse>;
+  post(
+    // eslint-disable-next-line no-unused-vars
+    path: string,
+    // eslint-disable-next-line no-unused-vars
+    body: unknown,
+    // eslint-disable-next-line no-unused-vars
+    config?: RequestInit,
+  ): Promise<SuccessResponse>;
 };
 
 type UnknownBody = {
-  message?: string,
-  [key: string]: unknown
-}
+  message?: string;
+  [key: string]: unknown;
+};
 
 export type SuccessResponse = {
-  body: UnknownBody,
-  httpStatus: number
-}
+  body: UnknownBody;
+  httpStatus: number;
+};
 
-async function http(path: string, config: RequestInit): Promise<SuccessResponse> {
+async function http(
+  path: string,
+  config: RequestInit,
+): Promise<SuccessResponse> {
   const request = new Request(path, config);
   const response = await fetch(request);
 
@@ -27,12 +37,12 @@ async function http(path: string, config: RequestInit): Promise<SuccessResponse>
     // });
   }
 
-  const responseBody = await response.json() as UnknownBody;
+  const responseBody = (await response.json()) as UnknownBody;
 
   return {
     body: responseBody,
-    httpStatus: response.status
-  }
+    httpStatus: response.status,
+  };
 }
 
 export async function get(

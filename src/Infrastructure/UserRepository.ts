@@ -1,6 +1,9 @@
 import { PrismaClient, User } from "@prisma/client";
-import { UserCreation, UserRepositoryInterface } from "../Domain/RepositoryInterface/UserRepositoryInterface";
-import {hash} from "bcrypt";
+import {
+  UserCreation,
+  UserRepositoryInterface,
+} from "../Domain/RepositoryInterface/UserRepositoryInterface";
+import { hash } from "bcrypt";
 
 export class UserRepository implements UserRepositoryInterface {
   private prisma = new PrismaClient();
@@ -11,44 +14,39 @@ export class UserRepository implements UserRepositoryInterface {
     return users;
   }
 
-  async findUser(email: string): Promise<User|null> {
+  async findUser(email: string): Promise<User | null> {
     try {
       const user = await this.prisma.user.findFirstOrThrow({
         where: {
-          email: email
-        }
-      })
+          email: email,
+        },
+      });
 
       return user;
     } catch (error) {
       return null;
     }
-
   }
 
   async createUser(user: UserCreation): Promise<boolean> {
     // TODO
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-    const password = await hash(user.password,5) as string;
+    const password = await hash(user.password, 5);
 
     try {
       await this.prisma.user.create({
         data: {
           name: user.name,
           email: user.email,
-          password: password ,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          password: password,
           createdAt: new Date().toISOString(),
           status: "offline",
-        }
+        },
       });
       return true;
     } catch (error) {
-      console.log(error);
       return false;
     }
-
   }
-
-
 }
-

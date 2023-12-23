@@ -11,7 +11,6 @@ export interface SignUpRequest extends NextRequest {
 }
 
 export async function POST(req: SignUpRequest) {
-  
   const user = await req.json();
 
   const signUpUseCase = new SignUpUseCase(new UserRepository());
@@ -20,9 +19,8 @@ export async function POST(req: SignUpRequest) {
     await signUpUseCase.execute(user);
   } catch (error) {
     const errorMessage = ErrorExceptionHelper.getMessage(error);
-    return (new CustomResponse({message: errorMessage})).conflict();
+    return new CustomResponse({ message: errorMessage }).conflict();
   }
-  
-  return (new CustomResponse({message: 'User created successfully'})).ok();
-}
 
+  return new CustomResponse({ message: "User created successfully" }).ok();
+}

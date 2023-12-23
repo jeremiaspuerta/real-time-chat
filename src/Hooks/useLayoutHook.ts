@@ -1,21 +1,21 @@
-import { User } from "@prisma/client";
-import { useEffect, useState } from "react";
+// import { User } from "@prisma/client";
+// import { useEffect, useState } from "react";
 import * as fetch from "../Helper/HttpHelper";
 import { startChatUseCase } from "../Domain/UseCase/ChatUseCases";
 import { useRouter } from "next/navigation";
-import { getUsersUseCase } from "../Domain/UseCase/SignUpUseCase";
+// import { getUsersUseCase } from "../Domain/UseCase/SignUpUseCase";
 
 export function useLayoutHook() {
-  const [users, setUsers] = useState<null | User[]>(null);
+  // const [users, setUsers] = useState<null | User[]>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    async function init() {
-      const allUsers = await getUsersUseCase(fetch);
-      setUsers(allUsers as User[]);
-    }
-    void init();
-  }, []);
+  // useEffect(() => {
+  //   async function init() {
+  //     const allUsers = await getUsersUseCase(fetch);
+  //     setUsers(allUsers as User[]);
+  //   }
+  //   void init();
+  // }, []);
 
   async function handleClickOnUser(userId: string): Promise<void> {
     //TODO primero buscar el chat. Si existe, redireccionar. Sino, crear y luego redireccionar
@@ -27,7 +27,7 @@ export function useLayoutHook() {
   }
 
   return {
-    users,
+    // users,
     handleClickOnUser,
   };
 }

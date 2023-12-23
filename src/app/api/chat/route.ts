@@ -15,7 +15,10 @@ export async function POST(req: CreateChatRequest) {
   const findChat = await chatRepository.findChatByUserIds(userIds);
 
   if (typeof findChat == "object") {
-    return NextResponse.json({ message: "Chat exists!" }, { status: HTTP_CONFLICT });
+    return NextResponse.json(
+      { message: "Chat exists!" },
+      { status: HTTP_CONFLICT },
+    );
   }
 
   const chat = await chatRepository.createChat(userIds);

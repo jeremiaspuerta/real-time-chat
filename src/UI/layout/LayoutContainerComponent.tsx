@@ -1,23 +1,23 @@
 "use client";
 
-import { ScrollShadow } from "@nextui-org/react";
-import { useLayoutHook } from "../../Hooks/useLayoutHook";
-import { ListUsersComponent } from "./ListUsersComponent";
-import { User } from "@prisma/client";
-import { BubbleUser } from "../shared/BubbleUser";
+// import { ScrollShadow } from "@nextui-org/react";
+// import { useLayoutHook } from "../../Hooks/useLayoutHook";
+// import { ListUsersComponent } from "./ListUsersComponent";
+// import { User } from "@prisma/client";
+// import { BubbleUser } from "../shared/BubbleUser";
 
 export const LayoutContainerComponent = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const { users, handleClickOnUser } = useLayoutHook();
+  // const { handleClickOnUser } = useLayoutHook();
 
   // TODO
 
   return (
     <div className="w-full h-screen flex flex-row gap-4 bg-white">
-      {users === null && <p>Loading</p>}
+      {/* {users === null && <p>Loading</p>}
       {users != null && (
         <ListUsersComponent>
           <ScrollShadow hideScrollBar className="flex flex-col gap-5">
@@ -31,7 +31,7 @@ export const LayoutContainerComponent = ({
             ))}
           </ScrollShadow>
         </ListUsersComponent>
-      )}
+      )} */}
       {children}
     </div>
   );
