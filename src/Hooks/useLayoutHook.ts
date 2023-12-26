@@ -27,8 +27,6 @@ export function useLayoutHook() {
   }, []);
 
   async function handleClickOnUser(userId: string): Promise<void> {
-    console.log("hola");
-
     const chatCreateRequest = await fetch.post("/api/chat/create", {
       userId,
     });

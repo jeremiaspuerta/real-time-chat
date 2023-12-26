@@ -12,6 +12,7 @@ type Props = {
 
 export const BubbleUser = ({ name, isOnline, handleClick }: Props) => {
   return (
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <div className={styles.container} onClick={() => handleClick()}>
       <Avatar
         src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
