@@ -48,7 +48,7 @@ async function http(
 export async function get(
   path: string,
   config?: RequestInit,
-): Promise<unknown> {
+): Promise<SuccessResponse> {
   const init = { method: "get", ...config };
   return await http(path, init);
 }

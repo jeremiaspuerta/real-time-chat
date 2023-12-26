@@ -21,7 +21,7 @@ export class SignUpUseCase {
   }
 
   private async validateIfUserExists(email: string): Promise<void> {
-    const user = await this.repository.findUser(email);
+    const user = await this.repository.find(email);
 
     if (user) {
       throw new Error(`User with this email already exists`);

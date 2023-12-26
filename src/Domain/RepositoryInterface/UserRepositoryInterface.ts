@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 
 export type UserCreation = {
   name: string;
@@ -11,9 +11,10 @@ export type UserLogIn = {
   password: string;
 };
 export interface UserRepositoryInterface {
-  getUsers(): Promise<User[]>;
   // eslint-disable-next-line no-unused-vars
-  findUser(email: string): Promise<User | null>;
+  findMany(where?: Prisma.UserWhereInput): Promise<User[]>;
+  // eslint-disable-next-line no-unused-vars
+  find(email: string): Promise<User | null>;
   // eslint-disable-next-line no-unused-vars
   createUser(user: UserCreation): Promise<boolean>;
 }

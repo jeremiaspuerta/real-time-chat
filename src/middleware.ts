@@ -1,20 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ValidateTokenUseCase } from "./Domain/UseCase/ValidateTokenUseCase";
+import { getAuthTokenFromCookie } from "./Helper/GetAuthTokenFromCookie";
 
-// This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  const cookies = request.cookies.getAll();
-  const tokenCookieFilter = cookies.filter(
-    (cookie) => cookie.name === "AUTH_TOKEN",
-  );
-
-  if (tokenCookieFilter.length === 0) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-  const authToken = tokenCookieFilter[0].value;
-
   try {
+    const authToken = getAuthTokenFromCookie(request);
     new ValidateTokenUseCase().execute(authToken);
   } catch {
     return NextResponse.redirect(new URL("/login", request.url));

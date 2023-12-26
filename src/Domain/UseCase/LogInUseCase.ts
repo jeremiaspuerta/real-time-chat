@@ -42,7 +42,7 @@ export class LogInUseCase {
   }
 
   private async getUser(email: string): Promise<User> {
-    const user = await this.repository.findUser(email);
+    const user = await this.repository.find(email);
 
     if (!user) {
       throw new Error(`User with this email doesn't exist`);

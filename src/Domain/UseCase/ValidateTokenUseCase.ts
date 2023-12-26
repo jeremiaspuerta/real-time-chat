@@ -1,19 +1,9 @@
-type DecodedToken = {
-  exp: number;
-  email: string;
-  iat: number;
-};
+import { decodeJwt } from "../../Helper/DecodeJwt";
 
 export class ValidateTokenUseCase {
   public execute(token: string) {
-    const decodedToken = this.decodeJwt(token);
+    const decodedToken = decodeJwt(token);
     this.validateExp(decodedToken.exp);
-  }
-
-  private decodeJwt(token: string): DecodedToken {
-    return JSON.parse(
-      Buffer.from(token.split(".")[1], "base64").toString(),
-    ) as DecodedToken;
   }
 
   private validateExp(exp: number): void {

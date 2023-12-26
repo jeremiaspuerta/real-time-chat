@@ -1,4 +1,4 @@
-import { PrismaClient, User } from "@prisma/client";
+import { Prisma, PrismaClient, User } from "@prisma/client";
 import {
   UserCreation,
   UserRepositoryInterface,
@@ -8,13 +8,7 @@ import { hash } from "bcrypt";
 export class UserRepository implements UserRepositoryInterface {
   private prisma = new PrismaClient();
 
-  async getUsers(): Promise<User[]> {
-    const users = await this.prisma.user.findMany();
-
-    return users;
-  }
-
-  async findUser(email: string): Promise<User | null> {
+  async find(email: string): Promise<User | null> {
     try {
       const user = await this.prisma.user.findFirstOrThrow({
         where: {
@@ -28,8 +22,15 @@ export class UserRepository implements UserRepositoryInterface {
     }
   }
 
+  async findMany(where?: Prisma.UserWhereInput): Promise<User[]> {
+    const users = await this.prisma.user.findMany({
+      where,
+    });
+
+    return users;
+  }
+
   async createUser(user: UserCreation): Promise<boolean> {
-    // TODO
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const password = await hash(user.password, 5);
 
