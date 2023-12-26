@@ -13,15 +13,16 @@ export class LogInUseCase {
   public async execute(email: string, password: string): Promise<string> {
     const user = await this.getUser(email);
     await this.validatePassword(password, user.password);
-    const userJwt = this.getUserJWT();
+    const userJwt = this.getUserJWT(email);
 
     return userJwt;
   }
 
-  private getUserJWT(): string {
+  private getUserJWT(email: string): string {
     const userJwt = jwt.sign(
       {
         exp: Math.floor(Date.now() / 1000) + 60 * 60,
+        email,
       },
       "secret",
     );

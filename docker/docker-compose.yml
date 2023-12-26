@@ -9,13 +9,13 @@ services:
     networks:
       - mongoCluster
     entrypoint: [ "/usr/bin/mongod", "--replSet", "myReplicaSetName","--bind_ip","localhost,mongo1" ]
-    healthcheck:
-      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'myReplicaSetName',members:[{_id:0,host:'mongo1'},{_id:1,host:'mongo2'},{_id:2,host:'mongo3'}]}) }; var db = db.getSiblingDB('chat'); db.createCollection('User'); db.createCollection('Chat'); db.createCollection('Message'); db.createCollection('ChatUser');" | mongosh --port 27017 --quiet
-      interval: 5s
-      timeout: 30s
-      start_period: 10s
-      start_interval: 300s
-      retries: 1
+    # healthcheck:
+    #   test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'myReplicaSetName',members:[{_id:0,host:'mongo1'},{_id:1,host:'mongo2'},{_id:2,host:'mongo3'}]}) }; var db = db.getSiblingDB('chat'); db.createCollection('User'); db.createCollection('Chat'); db.createCollection('Message'); db.createCollection('ChatUser');" | mongosh --port 27017 --quiet
+    #   interval: 5s
+    #   timeout: 30s
+    #   start_period: 10s
+    #   start_interval: 300s
+    #   retries: 1
   mongo2:
     container_name: mongo2
     image: mongo:latest
@@ -40,7 +40,17 @@ services:
       - mongo3
     volumes:
       - ./data:/data/db
+    command: >
+      bash -c "
+        sleep 5
+        echo 'Setting up MongoDB';
+        mongosh --host mongo1 --port 27017 --eval 'printjson(rs.initiate({_id:\"myReplicaSetName\",members:[{_id:0,host:\"mongo1\"},{_id:1,host:\"mongo2\"},{_id:2,host:\"mongo3\"}]}) )';
+        mongosh --host mongo1 --port 27017 --eval 'var db = db.getSiblingDB(\"chat\"); db.createCollection(\"User\"); db.createCollection(\"Chat\"); db.createCollection(\"Message\"); db.createCollection(\"ChatUser\");';
+        echo 'MongoDB setup complete';
+      "
     restart: "no"
+    networks:
+      - mongoCluster
 networks:
   mongoCluster:
     driver: bridge
