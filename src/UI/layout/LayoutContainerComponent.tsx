@@ -2,7 +2,6 @@
 
 import styles from "../styles/chat-layout.module.css";
 import { ListUsersComponent } from "./ListUsersComponent";
-
 import { useLayoutHook } from "../../Hooks/useLayoutHook";
 import { User } from "@prisma/client";
 import { ScrollShadow } from "@nextui-org/react";

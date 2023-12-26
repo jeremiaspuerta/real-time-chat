@@ -1,12 +1,13 @@
-import { Prisma, PrismaClient, User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import {
   UserCreation,
   UserRepositoryInterface,
 } from "../Domain/RepositoryInterface/UserRepositoryInterface";
 import { hash } from "bcrypt";
+import prismaClient from "../Helper/PrismaClientHelper";
 
 export class UserRepository implements UserRepositoryInterface {
-  private prisma = new PrismaClient();
+  private prisma = prismaClient;
 
   async find(email: string): Promise<User | null> {
     try {

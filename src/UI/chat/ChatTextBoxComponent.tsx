@@ -1,5 +1,5 @@
 import { Textarea } from "@nextui-org/react";
-import { PLACEHOLDER_CHAT_MESSAGE } from "@/constants/Placeholders";
+import { PLACEHOLDER_CHAT_MESSAGE } from "../../Constants/Placeholders";
 
 export const ChatTextBoxComponent = () => {
   return (

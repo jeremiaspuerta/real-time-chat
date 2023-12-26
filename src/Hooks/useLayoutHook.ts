@@ -1,7 +1,6 @@
-import { User } from "@prisma/client";
+import { Chat, User } from "@prisma/client";
 import { useEffect, useState } from "react";
 import * as fetch from "../Helper/HttpHelper";
-import { startChatUseCase } from "../Domain/UseCase/ChatUseCases";
 import { useRouter } from "next/navigation";
 import { HTTP_OK } from "../Constants/HttpStatusCode";
 import toast from "react-hot-toast";
@@ -28,12 +27,19 @@ export function useLayoutHook() {
   }, []);
 
   async function handleClickOnUser(userId: string): Promise<void> {
-    //TODO primero buscar el chat. Si existe, redireccionar. Sino, crear y luego redireccionar
+    console.log("hola");
 
-    // TODO tomar id del usuario logueado y formar un array con el userId del parametro
-    const chat = await startChatUseCase(fetch, [userId]);
+    const chatCreateRequest = await fetch.post("/api/chat/create", {
+      userId,
+    });
 
-    router.push(`/chat/${chat.id}`);
+    if (chatCreateRequest.httpStatus === HTTP_OK) {
+      const chat = chatCreateRequest.body as unknown as Chat;
+
+      router.push(`/chat/${chat.id}`);
+    } else {
+      toast.error(chatCreateRequest.body.message);
+    }
   }
 
   return {

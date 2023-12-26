@@ -1,5 +1,6 @@
 "use client";
 
+import styles from "../styles/bubble-user.module.css";
 import { Avatar, Chip } from "@nextui-org/react";
 
 type Props = {
@@ -10,37 +11,21 @@ type Props = {
 };
 
 export const BubbleUser = ({ name, isOnline, handleClick }: Props) => {
-  const bgHoverStyle = handleClick ? "hover:bg-slate-200" : "";
-
   return (
-    <div
-      className={
-        "w-full flex flex-row gap-5 items-center p-4 bg-slate-100 rounded-2xl " +
-        bgHoverStyle
-      }
-      onClick={() => handleClick}
-    >
+    <div className={styles.container} onClick={() => handleClick()}>
       <Avatar
         src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-        className="w-14 h-14 text-large"
+        className={styles.avatar}
       />
-      <div className="flex flex-col text-slate-900 font-bold">
+      <div className={styles.text_container}>
         <p>{name}</p>
         {isOnline && (
-          <Chip
-            color="success"
-            variant="dot"
-            className="text-slate-600 border-0 p-0"
-          >
+          <Chip color="success" variant="dot" className={styles.chip}>
             Active now
           </Chip>
         )}
         {!isOnline && (
-          <Chip
-            color="default"
-            variant="dot"
-            className="text-slate-600 border-0 p-0"
-          >
+          <Chip color="default" variant="dot" className={styles.chip}>
             Offline
           </Chip>
         )}

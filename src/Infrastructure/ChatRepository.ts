@@ -1,8 +1,9 @@
-import { Chat, PrismaClient } from "@prisma/client";
+import { Chat } from "@prisma/client";
 import { ChatRepositoryInterface } from "../Domain/RepositoryInterface/ChatRepositoryInterface";
+import prismaClient from "../Helper/PrismaClientHelper";
 
 export class ChatRepository implements ChatRepositoryInterface {
-  private prisma = new PrismaClient();
+  private prisma = prismaClient;
 
   async createChat(userIds: string[]): Promise<Chat | false> {
     try {
