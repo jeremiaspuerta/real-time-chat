@@ -1,5 +1,10 @@
-import { ContainerCurrentChat } from "../../../../UI/chat/containerCurrentChat";
+"use client";
+
+import { useChatHook } from "../../../../Hooks/useChatHook";
+import { ContainerCurrentChat } from "../../../../UI/chat/ContainerCurrentChat";
 
 export default function ChatPage() {
-  return <ContainerCurrentChat />;
+  const { chat } = useChatHook();
+
+  return <ContainerCurrentChat chat={chat} />;
 }

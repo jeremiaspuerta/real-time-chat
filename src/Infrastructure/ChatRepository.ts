@@ -5,7 +5,29 @@ import prismaClient from "../Helper/PrismaClientHelper";
 export class ChatRepository implements ChatRepositoryInterface {
   private prisma = prismaClient;
 
-  async createChat(userIds: string[]): Promise<Chat | false> {
+  async find(chatId: string): Promise<false | Chat> {
+    try {
+      const chat = await this.prisma.chat.findFirst({
+        where: {
+          id: chatId,
+        },
+        include: {
+          Message: {
+            include: { user: true },
+          },
+          ChatUser: {
+            include: { user: true },
+          },
+        },
+      });
+
+      return chat;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async create(userIds: string[]): Promise<Chat | false> {
     try {
       const chat = await this.prisma.chat.create({
         data: {
@@ -30,7 +52,7 @@ export class ChatRepository implements ChatRepositoryInterface {
     }
   }
 
-  async findChatByUserIds(userIds: string[]): Promise<Chat | false> {
+  async findByUserIds(userIds: string[]): Promise<Chat | false> {
     try {
       const chat = await this.prisma.chat.findFirst({
         where: {

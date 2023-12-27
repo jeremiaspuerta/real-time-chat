@@ -4,7 +4,6 @@ import * as fetch from "../Helper/HttpHelper";
 import { useRouter } from "next/navigation";
 import { HTTP_OK } from "../Constants/HttpStatusCode";
 import toast from "react-hot-toast";
-// import { getUsersUseCase } from "../Domain/UseCase/SignUpUseCase";
 
 export function useLayoutHook() {
   const [users, setUsers] = useState<Array<unknown>>([]);
@@ -20,8 +19,6 @@ export function useLayoutHook() {
       } else {
         toast.error(usersRequest.body.message);
       }
-
-      //
     }
     void init();
   }, []);

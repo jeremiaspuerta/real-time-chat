@@ -1,0 +1,28 @@
+/* Estilos para la clase base */
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.base {
+  max-width: 100vw; /* Equivalente a max-w-screen en Tailwind */
+  max-height: 6rem;
+}
+
+/* Estilos para la clase input */
+.input {
+  resize: vertical; /* Equivalente a resize-y en Tailwind */
+  min-height: 14px;
+  font-size: 1.125rem;
+}
+
+.input_wrapper {
+  background-color: #f7f7f7;
+  border-radius: 25px 0% 0% 25px;
+}
+
+.button {
+  height: 100%;
+  width: 6vh;
+  border-radius: 0% 25px 25px 0%;
+}

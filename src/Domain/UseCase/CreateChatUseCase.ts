@@ -16,13 +16,13 @@ export class CreateChatUseCase {
 
     const userIds = [authUserId, userIdTo];
 
-    const findChat = await this.chatRepository.findChatByUserIds(userIds);
+    const findChat = await this.chatRepository.findByUserIds(userIds);
 
     if (typeof findChat == "object") {
       throw new Error("Chat exists!");
     }
 
-    const chat = await this.chatRepository.createChat(userIds);
+    const chat = await this.chatRepository.create(userIds);
 
     if (chat === false) {
       throw new Error("An error ocurred trying to create the chat!");
