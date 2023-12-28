@@ -51,4 +51,20 @@ export class UserRepository implements UserRepositoryInterface {
       return false;
     }
   }
+
+  async update(userId: string, data: Partial<User>): Promise<boolean> {
+    try {
+      await this.prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data,
+      });
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
 }

@@ -1,0 +1,55 @@
+.flex_container_end {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  align-items: flex-end;
+}
+
+.flex_container_start {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  align-items: flex-start;
+}
+
+.message_container_violet {
+  width: 16.6667%;
+  min-width: 16.6667%;
+  max-width: 50%;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background-color: #7f3cc1;
+}
+
+.message_container_slate {
+  width: 16.6667%;
+  min-width: 16.6667%;
+  max-width: 50%;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background-color: #ebf4f7;
+}
+
+.text_container_white {
+  color: white;
+}
+
+.text_container_slate {
+  color: #1f2937;
+}
+
+.date_container_white {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  float: right;
+  color: white;
+}
+
+.date_container_slate {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  float: right;
+  color: #1f2937;
+}

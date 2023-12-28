@@ -74,4 +74,27 @@ export class ChatRepository implements ChatRepositoryInterface {
       return false;
     }
   }
+
+  async findManyByUserIds(userIds: string[]): Promise<Chat[] | false> {
+    try {
+      const chat = await this.prisma.chat.findMany({
+        where: {
+          ChatUser: {
+            some: {
+              userId: {
+                in: userIds,
+              },
+            },
+          },
+        },
+        include: {
+          ChatUser: true,
+        },
+      });
+
+      return chat ?? false;
+    } catch (error) {
+      return false;
+    }
+  }
 }

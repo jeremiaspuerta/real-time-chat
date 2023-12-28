@@ -7,4 +7,6 @@ export interface ChatRepositoryInterface {
   create(usersIds: string[]): Promise<Chat | false>;
   // eslint-disable-next-line no-unused-vars
   findByUserIds(usersIds: string[]): Promise<Chat | false>;
+  // eslint-disable-next-line no-unused-vars
+  findManyByUserIds(userIds: string[]): Promise<Chat[] | false>;
 }

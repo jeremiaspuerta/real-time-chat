@@ -11,17 +11,21 @@ export function useLayoutHook() {
 
   useEffect(() => {
     async function init() {
-      const usersRequest = await fetch.get("/api/user/get-all");
-
-      if (usersRequest.httpStatus === HTTP_OK) {
-        const users = usersRequest.body as unknown as User[];
-        setUsers(users);
-      } else {
-        toast.error(usersRequest.body.message);
-      }
+      await fetchUsers();
     }
     void init();
   }, []);
+
+  async function fetchUsers(): Promise<void> {
+    const usersRequest = await fetch.get("/api/user/get-all");
+
+    if (usersRequest.httpStatus === HTTP_OK) {
+      const users = usersRequest.body as unknown as User[];
+      setUsers(users);
+    } else {
+      toast.error(usersRequest.body.message);
+    }
+  }
 
   async function handleClickOnUser(userId: string): Promise<void> {
     const chatCreateRequest = await fetch.post("/api/chat/create", {

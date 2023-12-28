@@ -45,6 +45,7 @@ services:
         sleep 5
         echo 'Setting up MongoDB';
         mongosh --host mongo1 --port 27017 --eval 'printjson(rs.initiate({_id:\"myReplicaSetName\",members:[{_id:0,host:\"mongo1\"},{_id:1,host:\"mongo2\"},{_id:2,host:\"mongo3\"}]}) )';
+        sleep 15
         mongosh --host mongo1 --port 27017 --eval 'var db = db.getSiblingDB(\"chat\"); db.createCollection(\"User\"); db.createCollection(\"Chat\"); db.createCollection(\"Message\"); db.createCollection(\"ChatUser\");';
         echo 'MongoDB setup complete';
       "

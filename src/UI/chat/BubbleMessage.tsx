@@ -1,26 +1,26 @@
-import { loremIpsum } from "lorem-ipsum";
+import styles from "../../UI/styles/bubble-message.module.css";
 
-interface Props {
+type Props = {
   align: "start" | "end";
-}
+  text: string;
+};
 
-export const BubbleMessage = ({ align }: Props) => {
-  const bgColor = align === "end" ? "bg-violet-500" : "bg-slate-100";
-  const textColor = align === "end" ? "text-white" : "text-slate-900";
+export const BubbleMessage = ({ align, text }: Props) => {
+  const containerClassname =
+    align === "end" ? styles.flex_container_end : styles.flex_container_start;
+  const messageContainerClassname =
+    align === "end"
+      ? styles.message_container_violet
+      : styles.message_container_slate;
+  const textClassname = align === "end" ? styles.text_white : styles.text_slate;
+  const dateClassname =
+    align === "end" ? styles.date_container_white : styles.date_container_slate;
 
   return (
-    <div className={"flex flex-col w-full mb-5 items-" + align}>
-      <div
-        className={"w-1/6 min-w-1/6 max-w-1/2 p-3 " + bgColor + " rounded-2xl"}
-      >
-        <p className={textColor}>
-          {loremIpsum({
-            count: 1,
-          })}
-        </p>
-        <p className={"text-xs mt-2 float-end " + textColor}>
-          22/04/2023 13:04
-        </p>
+    <div className={containerClassname}>
+      <div className={messageContainerClassname}>
+        <p className={textClassname}>{text}</p>
+        <p className={dateClassname}>22/04/2023 13:04</p>
       </div>
     </div>
   );

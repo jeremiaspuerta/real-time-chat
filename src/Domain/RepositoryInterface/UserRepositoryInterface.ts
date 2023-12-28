@@ -17,4 +17,6 @@ export interface UserRepositoryInterface {
   find(email: string): Promise<User | null>;
   // eslint-disable-next-line no-unused-vars
   createUser(user: UserCreation): Promise<boolean>;
+  // eslint-disable-next-line no-unused-vars
+  update(userId: string, data: Partial<User>): Promise<boolean>;
 }
