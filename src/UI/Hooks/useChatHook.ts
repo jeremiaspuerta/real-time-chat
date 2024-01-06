@@ -16,7 +16,6 @@ export function useChatHook() {
   const chatId = pathname.split("/")[2];
 
   useEffect(() => {
-    
     async function init() {
       const socket = io(`${process.env.SOCKET_URL}:${process.env.SOCKET_PORT}`);
       socket.on("receive_msgs", (updatedMessages: MessageWithUser[]) => {
@@ -34,10 +33,9 @@ export function useChatHook() {
       }
       return () => {
         socket.disconnect();
-      }
+      };
     }
     void init();
-
   }, [chatId]);
 
   async function handleSendMessage(message: string): Promise<void> {

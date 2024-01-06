@@ -9,14 +9,15 @@ import { BubbleUser } from "@/components/shared/BubbleUser";
 import { ChatMapperType } from "@/helpers/ChatMapper";
 import { RecentChatsComponent } from "@/components/layout/RecentChats";
 import { useLogOutHook } from "@/hooks/useLogOutHook";
-import logout_syles from '@/styles/log-out-button.module.css';
+import logout_syles from "@/styles/log-out-button.module.css";
 
 export const LayoutContainerComponent = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const { chats, users, handleClickOnUser, handleClickOnChat } = useLayoutHook();
+  const { chats, users, handleClickOnUser, handleClickOnChat } =
+    useLayoutHook();
   const { handleLogOut } = useLogOutHook();
 
   return (
@@ -62,7 +63,11 @@ export const LayoutContainerComponent = ({
             </ScrollShadow>
           </ListUsersComponent>
         )}
-        <Button className={logout_syles.button} color="danger" onClick={() => handleLogOut()}>
+        <Button
+          className={logout_syles.button}
+          color="danger"
+          onClick={() => handleLogOut()}
+        >
           Log Out
         </Button>
       </div>

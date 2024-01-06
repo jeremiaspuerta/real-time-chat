@@ -31,9 +31,12 @@ async function http(
 
   if (!response.ok) {
     const responseBody = (await response.json()) as UnknownBody;
-    
+
     return {
-      body: responseBody ?? {message:'An error ocurred trying to perform this action. Please try later.'},
+      body: responseBody ?? {
+        message:
+          "An error ocurred trying to perform this action. Please try later.",
+      },
       httpStatus: response.status ?? 400,
     };
   }

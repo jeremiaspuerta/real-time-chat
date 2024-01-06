@@ -11,8 +11,7 @@ export function useLogOutHook() {
   const cookies = useCookies();
 
   async function handleLogOut(): Promise<void> {
-
-    const signUpRequest = await deleteHttpMethod("/api/auth/logout",{});
+    const signUpRequest = await deleteHttpMethod("/api/auth/logout", {});
 
     if (signUpRequest.httpStatus === HTTP_OK) {
       cookies.remove("AUTH_TOKEN");
