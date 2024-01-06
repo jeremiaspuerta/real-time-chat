@@ -1,23 +1,23 @@
 "use client";
 
-import { useChatHook } from "../../../../Hooks/useChatHook";
-import { ChatMessagesComponent } from "../../../../UI/chat/ChatMessagesComponent";
-import { ChatTextBoxComponent } from "../../../../UI/chat/ChatTextBoxComponent";
-import { ContainerCurrentChat } from "../../../../UI/chat/ContainerCurrentChat";
-import { BubbleUser } from "../../../../UI/shared/BubbleUser";
-import styles from "../../../../UI/styles/chat-page.module.css";
+import { useChatHook } from "@/hooks/useChatHook";
+import styles from "@/styles/chat-page.module.css";
+import LoadingChatComponent from "@/components/chat/Loading";
+import { BubbleUser } from "@/components/shared/BubbleUser";
+import { ContainerCurrentChat } from "@/components/chat/ContainerCurrentChat";
+import { ChatMessagesComponent } from "@/components/chat/ChatMessagesComponent";
+import { ChatTextBoxComponent } from "@/components/chat/ChatTextBoxComponent";
 
 export default function ChatPage() {
-  const { chat, handleSendMessage } = useChatHook();
+  const { chat, messages, handleSendMessage } = useChatHook();
 
   if (!chat) {
-    return <p>Loading...</p>;
+    return <LoadingChatComponent />;
   }
 
   const recipient = chat.users.filter((user) => user.rol === "recipient")[0];
   const recipientName = recipient.name;
   const recipientStatus = recipient.status;
-  const { messages } = chat;
 
   return (
     <ContainerCurrentChat>

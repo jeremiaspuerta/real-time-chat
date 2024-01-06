@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ChatRepository } from "../../../../Infrastructure/ChatRepository";
-import { HTTP_OK } from "../../../../Constants/HttpStatusCode";
-import { CreateChatUseCase } from "../../../../Domain/UseCase/CreateChatUseCase";
-import { ErrorExceptionHelper } from "../../../../Helper/ErrorExceptionHelper";
-import { CustomResponse } from "../../../../Helper/CustomResponse";
-import { getAuthTokenFromCookie } from "../../../../Helper/GetAuthTokenFromCookie";
-import { decodeJwt } from "../../../../Helper/DecodeJwt";
-import { UserRepository } from "../../../../Infrastructure/UserRepository";
+import { ChatRepository } from "@/infrastructure/ChatRepository";
+import { HTTP_OK } from "@/constants/HttpStatusCode";
+import { CreateChatUseCase } from "@/domain/UseCase/CreateChatUseCase";
+import { ErrorExceptionHelper } from "@/helpers/ErrorExceptionHelper";
+import { CustomResponse } from "@/helpers/CustomResponse";
+import { decodeJwt } from "@/helpers/DecodeJwt";
+import { UserRepository } from "@/infrastructure/UserRepository";
+import { AuthCookiesHelper } from "@/helpers/AuthCookiesHelper";
 
 interface CreateChatRequest extends NextRequest {
   json(): Promise<{
@@ -18,7 +18,8 @@ export async function POST(req: CreateChatRequest) {
   const { userId } = await req.json();
 
   try {
-    const authToken = getAuthTokenFromCookie(req);
+    const authCookiesHelper = new AuthCookiesHelper(req.cookies.getAll());
+    const authToken = authCookiesHelper.getToken();
 
     const { email } = decodeJwt(authToken);
 
@@ -35,7 +36,7 @@ export async function POST(req: CreateChatRequest) {
     return NextResponse.json(chat, { status: HTTP_OK });
   } catch (error) {
     const errorMessage = ErrorExceptionHelper.getMessage(error);
-
-    return new CustomResponse({ message: errorMessage }).conflict();
+    const response = new CustomResponse({ message: errorMessage }).conflict();
+    return response;
   }
 }

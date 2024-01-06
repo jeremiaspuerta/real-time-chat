@@ -1,0 +1,31 @@
+.card {
+  width: 100%;
+  margin: 1vh;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.skeleton {
+  height: 7vh;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.skeleton_div {
+  height: 24px;
+  background-color: #e2e8f0;
+}
+
+.card_content {
+  margin-top: 1.25rem;
+}
+
+.skeleton_content {
+  margin-top: 1.25rem;
+}
+
+.skeleton_content_div {
+  height: 16px;
+}

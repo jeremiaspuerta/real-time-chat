@@ -1,9 +1,9 @@
 "use client";
 
-import { LogInForm } from "../../UI/LogInForm";
-import { useLogInHook } from "../../Hooks/useLogInHook";
-import { UserLogIn } from "../../Domain/RepositoryInterface/UserRepositoryInterface";
-import { SignUpLogInContainer } from "../../UI/shared/SignUpLogInContainer";
+import { LogInForm } from "@/components/LogInForm";
+import { useLogInHook } from "@/hooks/useLogInHook";
+import { SignUpLogInContainer } from "@/components/shared/SignUpLogInContainer";
+import { UserLogInType } from "@/types";
 
 export default function LoginPage() {
   const { handleLogIn } = useLogInHook();
@@ -13,7 +13,9 @@ export default function LoginPage() {
         Log in to your account
       </h1>
       <LogInForm
-        handleLogIn={(userLogIn: UserLogIn) => handleLogIn(userLogIn)}
+        handleLogIn={(UserLogInType: UserLogInType) =>
+          handleLogIn(UserLogInType)
+        }
       />
     </SignUpLogInContainer>
   );

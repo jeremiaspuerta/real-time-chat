@@ -1,12 +1,11 @@
-import { UserRepository } from "../../../../Infrastructure/UserRepository";
-import { UserCreation } from "../../../../Domain/RepositoryInterface/UserRepositoryInterface";
+import { UserRepository } from "@/infrastructure/UserRepository";
 import { NextRequest } from "next/server";
-import { SignUpUseCase } from "../../../../Domain/UseCase/SignUpUseCase";
-import { ErrorExceptionHelper } from "../../../../Helper/ErrorExceptionHelper";
-import { CustomResponse } from "../../../../Helper/CustomResponse";
+import { SignUpUseCase } from "@/domain/UseCase/SignUpUseCase";
+import { ErrorExceptionHelper } from "@/helpers/ErrorExceptionHelper";
+import { CustomResponse } from "@/helpers/CustomResponse";
+import { UserCreation } from "@/types";
 
 export interface SignUpRequest extends NextRequest {
-  // let's say our request accepts name and age property
   json(): Promise<UserCreation>;
 }
 

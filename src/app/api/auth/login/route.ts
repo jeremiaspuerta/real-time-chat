@@ -1,12 +1,12 @@
 import { NextRequest } from "next/server";
-import { LogInUseCase } from "../../../../Domain/UseCase/LogInUseCase";
-import { UserRepository } from "../../../../Infrastructure/UserRepository";
-import { ErrorExceptionHelper } from "../../../../Helper/ErrorExceptionHelper";
-import { CustomResponse } from "../../../../Helper/CustomResponse";
-import { UserLogIn } from "../../../../Domain/RepositoryInterface/UserRepositoryInterface";
+import { LogInUseCase } from "@/domain/UseCase/LogInUseCase";
+import { UserRepository } from "@/infrastructure/UserRepository";
+import { ErrorExceptionHelper } from "@/helpers/ErrorExceptionHelper";
+import { CustomResponse } from "@/helpers/CustomResponse";
+import { UserLogInType } from "@/types";
 
 export interface SignUpRequest extends NextRequest {
-  json(): Promise<UserLogIn>;
+  json(): Promise<UserLogInType>;
 }
 
 export async function POST(req: SignUpRequest) {

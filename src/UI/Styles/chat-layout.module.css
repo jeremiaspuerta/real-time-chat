@@ -1,0 +1,38 @@
+.main_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  background-color: #ffffff;
+}
+
+.chats_users_container {
+  display: flex;
+  flex-direction: column;
+  width: 30vh;
+  gap: 1vh;
+  margin: 1vh;
+}
+
+.users_container {
+  width: 100%;
+  height: 50%;
+  margin: 1vh;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  gap: 2vh;
+}
+
+.text {
+  color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.scroll_shadow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}

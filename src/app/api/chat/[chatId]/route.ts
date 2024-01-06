@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ErrorExceptionHelper } from "../../../../Helper/ErrorExceptionHelper";
-import { CustomResponse } from "../../../../Helper/CustomResponse";
-import { GetChatUseCase } from "../../../../Domain/UseCase/GetChatUseCase";
-import { ChatRepository } from "../../../../Infrastructure/ChatRepository";
-import { getAuthTokenFromCookie } from "../../../../Helper/GetAuthTokenFromCookie";
-import { decodeJwt } from "../../../../Helper/DecodeJwt";
-import { chatMapper } from "../../../../Helper/ChatMapper";
+import { ErrorExceptionHelper } from "@/helpers/ErrorExceptionHelper";
+import { CustomResponse } from "@/helpers/CustomResponse";
+import { GetChatUseCase } from "@/domain/UseCase/GetChatUseCase";
+import { ChatRepository } from "@/infrastructure/ChatRepository";
+import { decodeJwt } from "@/helpers/DecodeJwt";
+import { chatMapper } from "@/helpers/ChatMapper";
+import { AuthCookiesHelper } from "@/helpers/AuthCookiesHelper";
 
 export async function GET(req: NextRequest) {
   try {
-    const authToken = getAuthTokenFromCookie(req);
+    const authCookiesHelper = new AuthCookiesHelper(req.cookies.getAll());
+    const authToken = authCookiesHelper.getToken();
     const { email } = decodeJwt(authToken);
     const chatId = req.nextUrl.pathname.split("/")[3];
     const chatRepository = new ChatRepository();

@@ -1,9 +1,9 @@
 "use client";
 
-import { UserCreation } from "../../Domain/RepositoryInterface/UserRepositoryInterface";
-import { useSignUpHook } from "../../Hooks/useSignUpHook";
-import { SignUpForm } from "../../UI/SignUpForm";
-import { SignUpLogInContainer } from "../../UI/shared/SignUpLogInContainer";
+import { SignUpForm } from "@/components/SignUpForm";
+import { SignUpLogInContainer } from "@/components/shared/SignUpLogInContainer";
+import { useSignUpHook } from "@/hooks/useSignUpHook";
+import { UserCreation } from "@/types";
 
 export default function SignUpPage() {
   const { handleSignUp } = useSignUpHook();

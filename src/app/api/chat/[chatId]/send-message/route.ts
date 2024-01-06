@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { HTTP_OK } from "../../../../../Constants/HttpStatusCode";
-import { ErrorExceptionHelper } from "../../../../../Helper/ErrorExceptionHelper";
-import { CustomResponse } from "../../../../../Helper/CustomResponse";
-import { getAuthTokenFromCookie } from "../../../../../Helper/GetAuthTokenFromCookie";
-import { decodeJwt } from "../../../../../Helper/DecodeJwt";
-import { UserRepository } from "../../../../../Infrastructure/UserRepository";
-import { SendMessageUseCase } from "../../../../../Domain/UseCase/SendMessageUseCase";
-import { MessageRepository } from "../../../../../Infrastructure/MessageRepository";
+import { HTTP_OK } from "@/constants/HttpStatusCode";
+import { ErrorExceptionHelper } from "@/helpers/ErrorExceptionHelper";
+import { CustomResponse } from "@/helpers/CustomResponse";
+import { decodeJwt } from "@/helpers/DecodeJwt";
+import { UserRepository } from "@/infrastructure/UserRepository";
+import { SendMessageUseCase } from "@/domain/UseCase/SendMessageUseCase";
+import { MessageRepository } from "@/infrastructure/MessageRepository";
+import { AuthCookiesHelper } from "@/helpers/AuthCookiesHelper";
 
 interface SendMessageRequest extends NextRequest {
   json(): Promise<{
@@ -19,7 +19,8 @@ export async function POST(req: SendMessageRequest) {
   const chatId = req.nextUrl.pathname.split("/")[3];
 
   try {
-    const authToken = getAuthTokenFromCookie(req);
+    const authCookiesHelper = new AuthCookiesHelper(req.cookies.getAll());
+    const authToken = authCookiesHelper.getToken();
 
     const { email } = decodeJwt(authToken);
 
@@ -31,9 +32,13 @@ export async function POST(req: SendMessageRequest) {
       userRepository,
     );
 
-    await sendMessageUseCase.execute(email, chatId, message);
+    const createdMessage = await sendMessageUseCase.execute(
+      email,
+      chatId,
+      message,
+    );
 
-    return NextResponse.json([], { status: HTTP_OK });
+    return NextResponse.json({ message: createdMessage }, { status: HTTP_OK });
   } catch (error) {
     const errorMessage = ErrorExceptionHelper.getMessage(error);
 
