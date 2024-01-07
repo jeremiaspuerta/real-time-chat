@@ -22,7 +22,7 @@ La interacción entre el backend y el frontend se realiza mediante un token JWT 
 7. [Diagrama de la aplicación](#diagrama-de-la-aplicación)
 8. [Githooks](#githooks)
 
-## Requisitos 📋
+## <a name="requisitos"></a> Requisitos 📋 
 
 Antes de comenzar, asegúrese de tener contar con:
 
