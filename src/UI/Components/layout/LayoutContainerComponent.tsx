@@ -16,8 +16,7 @@ export const LayoutContainerComponent = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { chats, users, handleClickOnUser, goToChat } =
-    useLayoutHook();
+  const { chats, users, handleClickOnUser, goToChat } = useLayoutHook();
   const { handleLogOut } = useLogOutHook();
 
   return (
