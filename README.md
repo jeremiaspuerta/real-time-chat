@@ -18,8 +18,8 @@ La interacción entre el backend y el frontend se realiza mediante un token JWT 
 5. [Arquitectura](#arquitectura)
    1. [Backend](#backend)
    2. [Frontend](#frontend)
-6. [Estructura de directorios](#estructura-de-directorios)
-7. [Diagrama de la aplicación](#diagrama-de-la-aplicación)
+6. [Estructura de directorios](#directorios)
+7. [Diagrama de la aplicación](#diagrama)
 8. [Githooks](#githooks)
 
 ## <a name="requisitos"></a> Requisitos 📋 
@@ -31,7 +31,7 @@ Antes de comenzar, asegúrese de tener contar con:
 - **[Docker](https://www.docker.com/)** >= 24.0
 - **[Docker Compose](https://docs.docker.com/compose/install/)** >= 2.21
 
-## Instalación ⚙️
+## <a name="instalación"></a> Instalación ⚙️
 
 1. Clone el repositorio:
 
@@ -45,11 +45,11 @@ git clone https://github.com/jeremiaspuerta/real-time-chat.git
 cd real-time-chat && npm install
 ```
 
-## Configuración 🔧
+## <a name="configuración"></a> Configuración 🔧
 
 Copie el archivo `.env.example` con el nombre `.env` en la raíz del proyecto. El archivo `.env.example` contiene las variables requeridas con valores por defectos completamente funcionales.
 
-## Uso 🚦
+## <a name="uso"></a> Uso 🚦
 
 Inicie el contenedor de Docker:
 
@@ -71,21 +71,21 @@ npm run dev
 
 La aplicación estará disponible en http://localhost:3000.
 
-## Arquitectura 🏗️
+## <a name="arquitectura"></a> Arquitectura 🏗️
 
-### Backend 🌐
+### <a name="backend"></a> Backend 🌐
 
 El backend de esta aplicación se ha diseñado siguiendo algunos principios de arquitectura limpia. Se han implementado conceptos como Repository, Repository Interface y Use Cases para garantizar una estructura modular y mantenible.
 
 > ℹ️ Para más información sobre Arquitecturas limpias, consultar el [siguiente artículo](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html).
 
-### Frontend 🖥️
+### <a name="frontend"></a> Frontend 🖥️
 
-La arquitectura de frontend se sustenta en el patrón de diseño Hook, aprovechando las capacidades que ofrece React para gestionar el estado y el ciclo de vida de los componentes de manera más eficiente.
+La arquitectura de frontend se sustenta en el patrón de diseño Hook, aprovechando las capacidades que ofrece React para gestionar el estado y el ciclo de vida de los componentes.
 
 > ℹ️ Para más información sobre el patrón Hooks, consultar el [siguiente artículo](https://www.patterns.dev/react/hooks-pattern/).
 
-## Estructura de directorios 📂
+## <a name="directorios"></a> Estructura de directorios 📂
 
 Next.JS 14 naturalmente utiliza el directorio `src/` para envolver tanto los componentes, como asi tambien cada una de las rutas y la API.
 Siguiendo las convenciones del framework, el directorio `app/` se utiliza como ruteo de las paginas (`/login`,`/signup`,`/chat`) y de la propia API (`/api`).
@@ -118,12 +118,12 @@ Por último tenemos el directorio `Shared/`, en donde se encuentran `Constants/`
     - `Helpers`
     - ``Types.ts``
 
-## Diagrama de la aplicación 🔄
+## <a name="diagrama"></a> Diagrama de la aplicación 🔄
 
 El siguiente diagrama debe observarse desde abajo hacia arriba para comprender el funcionamiento del sistema:
 
 ![1704650711034](image/README/1704650711034.png)
 
-## Githooks 🪝
+## <a name="githooks"></a> Githooks 🪝
 
 Se ha configurado la librería [Husky](https://www.npmjs.com/package/husky) para gestionar los githooks. En particular, se utiliza pre-commit para ejecutar [ESlint](https://www.npmjs.com/package/eslint) y [Prettier](https://www.npmjs.com/package/prettier) antes de confirmar los cambios.
