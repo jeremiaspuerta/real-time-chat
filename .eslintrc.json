@@ -25,7 +25,7 @@
     "no-irregular-whitespace": "warn",
     "no-console": "warn",
     "max-lines": ["warn", 130],
-    "max-lines-per-function": ["warn", 70],
+    "max-lines-per-function": ["warn", 80],
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-for-in-array": "error",
     "@typescript-eslint/no-unsafe-argument": "error",

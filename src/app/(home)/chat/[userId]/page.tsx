@@ -9,7 +9,7 @@ import { ChatMessagesComponent } from "@/components/chat/ChatMessagesComponent";
 import { ChatTextBoxComponent } from "@/components/chat/ChatTextBoxComponent";
 
 export default function ChatPage() {
-  const { chat, messages, handleSendMessage } = useChatHook();
+  const { chat, messages, sendMessage } = useChatHook();
 
   if (!chat) {
     return <LoadingChatComponent />;
@@ -25,7 +25,7 @@ export default function ChatPage() {
       {messages.length === 0 && <div className={styles.empty_chat} />}
       {messages.length > 0 && <ChatMessagesComponent messages={messages} />}
       <ChatTextBoxComponent
-        handleSendMessage={(message: string) => handleSendMessage(message)}
+        handleSendMessage={(message: string) => sendMessage(message)}
       />
     </ContainerCurrentChat>
   );

@@ -38,7 +38,7 @@ export function useChatHook() {
     void init();
   }, [chatId]);
 
-  async function handleSendMessage(message: string): Promise<void> {
+  async function sendMessage(message: string): Promise<void> {
     const socket = io(`${process.env.SOCKET_URL}:${process.env.SOCKET_PORT}`);
     const sendMessageRequest = await fetch.post(
       `/api/chat/${chatId}/send-message`,
@@ -62,6 +62,6 @@ export function useChatHook() {
   return {
     chat,
     messages,
-    handleSendMessage,
+    sendMessage,
   };
 }

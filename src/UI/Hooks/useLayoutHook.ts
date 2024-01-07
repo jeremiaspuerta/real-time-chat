@@ -40,7 +40,7 @@ export function useLayoutHook() {
     }
   }
 
-  function handleClickOnChat(chatId: string): void {
+  function goToChat(chatId: string): void {
     router.push(`/chat/${chatId}`);
   }
 
@@ -62,6 +62,6 @@ export function useLayoutHook() {
     users,
     chats,
     handleClickOnUser,
-    handleClickOnChat,
+    goToChat,
   };
 }

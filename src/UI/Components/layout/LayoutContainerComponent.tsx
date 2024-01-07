@@ -16,7 +16,7 @@ export const LayoutContainerComponent = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { chats, users, handleClickOnUser, handleClickOnChat } =
+  const { chats, users, handleClickOnUser, goToChat } =
     useLayoutHook();
   const { handleLogOut } = useLogOutHook();
 
@@ -42,7 +42,7 @@ export const LayoutContainerComponent = ({
                         user.rol === "recipient",
                     )[0].status === "online"
                   }
-                  handleClick={() => handleClickOnChat(chat.id)}
+                  handleClick={() => goToChat(chat.id)}
                 />
               ))}
             </ScrollShadow>
